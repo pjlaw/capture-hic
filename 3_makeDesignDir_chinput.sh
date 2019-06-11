@@ -1,43 +1,41 @@
 #!/bin/bash
-#BSUB -J "chinput_lcl_2"
-#BSUB -P DMPGJMAAQ
+#BSUB -J chinput
+#BSUB -P 
 #BSUB -W 100:00
 #BSUB -n 2
 #BSUB -R "span[hosts=1]"
-#BSUB -q normal
-#BSUB -o /scratch/DGE/MOPOPGEN/plaw/scripts/tmp/design.%J.output
-#BSUB -e /scratch/DGE/MOPOPGEN/plaw/scripts/tmp/design.%J.error
+#BSUB -o design.%J.output
+#BSUB -e design.%J.error
 
-# This is inteded as template for creating a single node cyberman HPC job.
-# SUGGESTED USE: copy this template into the directory where the job logs will go, edit it to call the required scripts and run from that directory.
-# INPUT: the scripts to be called with the parameters used to call them.
 
 ## INPUTS ##
-
-# Base HiC directory on the system
-DATETIME=`date +%Y%m%d_%H%M%S`
-DIR_HIC="/scratch/DGE/MOPOPGEN/plaw/cyberman/chicago"
-# Location of CHiCAGO tools directory
-DIR_TOOLS="$DIR_HIC"/"scripts/chicagoTools/"
-LOG_FILE="$DATETIME"_"designDir".log
-# Set this to "nodelete" to keep intermediate files
-NODELETE="nodelete"
-
-#input files - CHANGE HERE
+# input files - CHANGE HERE
 SAMPLE_NAME="LCL_bw2_build37_1"
 # Input bam file
 FILE_BAM="/scratch/DGE/MOPOPGEN/plaw/cyberman/crc/cHiC/HICUP_bowtie2/LCL_1_b37/GM_rep2_all_R1_2.hicup.bam" 
-# Output file name without extension
-FNAME_OUT="$SAMPLE_NAME"_"$DATETIME"
-#output directory
-DIR_DESIGN="$DIR_HIC"/"results"/"$SAMPLE_NAME"/"chicago_designDir_""$DATETIME"
+# output directory - where you want your output
+OUTPUT="/scratch/DGE/MOPOPGEN/path/to/output/"
 
+DATETIME=`date +%Y%m%d_%H%M%S`
+OUT_DIR="$DIR_HIC"/"results"/"$SAMPLE_NAME"/"chicago_designDir_""$DATETIME"
+LOG_FILE="$OUT_DIR"/"$DATETIME"_"designDir".log
+FNAME_OUT="$SAMPLE_NAME"_"$DATETIME"
+
+# Reference data
+# Base HiC reference data directory
+REF_DIR="/scratch/DGE/MOPOPGEN/plaw/cyberman/chicago"
 # Reference files
-FILE_RMAP="$DIR_HIC"/"reference_data/20160111_163319_HindIII.rmap"
-#nwe baitmap file
-#FILE_BAITMAP="$DIR_HIC"/"reference_data/20170324_updated_HindIII.baitmap"
-#old baitmap file
-FILE_BAITMAP="$DIR_HIC"/"reference_data/20160111_163319_HindIII.baitmap"
+FILE_RMAP="$REF_DIR"/"reference_data/20160111_163319_HindIII.rmap"
+# Baitmap file
+FILE_BAITMAP="$REF_DIR"/"reference_data/20170324_updated_HindIII.baitmap"
+# Location of CHiCAGO tools directory
+DIR_TOOLS="REF_DIR"/"scripts/chicagoTools/"
+
+
+# Set this to "nodelete" to keep intermediate files
+NODELETE="nodelete"
+
+
 
 ############
 
@@ -45,15 +43,13 @@ FILE_BAITMAP="$DIR_HIC"/"reference_data/20160111_163319_HindIII.baitmap"
 
 echo "Running job with the following variables:" >> "$LOG_FILE"
 echo "DATETIME = ""$DATETIME" >> "$LOG_FILE"
-echo "DIR_HIC = ""$DIR_HIC" >> "$LOG_FILE"
-echo "LOG_FILE = ""$LOG_FILE" >> "$LOG_FILE"
+echo "OUT_DIR = ""$OUT_DIR" >> "$LOG_FILE"
+echo "FNAME_OUT = ""$FNAME_OUT" >> "$LOG_FILE"
 echo "" >> "$LOG_FILE"
 
 module load python/2.7.11
 
 mkdir -p "$DIR_DESIGN"
-cp "$FILE_RMAP" "$DIR_DESIGN"/
-cp "$FILE_BAITMAP" "$DIR_DESIGN"/
 
 # Run CHiCAGO tools to produce the files required by the CHiCAGO R scripts.
 echo "Running makeDesignFiles.py from chicago tools"
