@@ -36,7 +36,6 @@ DIR_TOOLS="REF_DIR"/"scripts/chicagoTools/"
 NODELETE="nodelete"
 
 
-
 ############
 
 #### SCRIPT ####
@@ -50,6 +49,10 @@ echo "" >> "$LOG_FILE"
 module load python/2.7.11
 
 mkdir -p "$DIR_DESIGN"
+
+#required for the run_chicago script (next stage)
+cp "$FILE_RMAP" "$DIR_DESIGN"/
+cp "$FILE_BAITMAP" "$DIR_DESIGN"/
 
 # Run CHiCAGO tools to produce the files required by the CHiCAGO R scripts.
 echo "Running makeDesignFiles.py from chicago tools"
