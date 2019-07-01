@@ -18,7 +18,7 @@ OUTPUT="/scratch/DGE/MOPOPGEN/path/to/output/"
 
 DATETIME=`date +%Y%m%d_%H%M%S`
 OUT_DIR="$OUTPUT"/"results"/"$SAMPLE_NAME"/"chicago_designDir_""$DATETIME"
-LOG_FILE="$OUT_DIR"/"$DATETIME"_"designDir".log
+LOG_FILE="$OUT_DIR"/"$DATETIME"_"designDir.log"
 FNAME_OUT="$SAMPLE_NAME"_"$DATETIME"
 
 # Reference data
