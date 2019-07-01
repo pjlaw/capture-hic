@@ -48,19 +48,19 @@ echo "" >> "$LOG_FILE"
 
 module load python/2.7.11
 
-mkdir -p "$DIR_DESIGN"
+mkdir -p "$OUT_DIR"
 
 #required for the run_chicago script (next stage)
-cp "$FILE_RMAP" "$DIR_DESIGN"/
-cp "$FILE_BAITMAP" "$DIR_DESIGN"/
+cp "$FILE_RMAP" "$OUT_DIR"/
+cp "$FILE_BAITMAP" "$OUT_DIR"/
 
 # Run CHiCAGO tools to produce the files required by the CHiCAGO R scripts.
 echo "Running makeDesignFiles.py from chicago tools"
 python "$DIR_TOOLS"/makeDesignFiles.py \
-	--designDir="$DIR_DESIGN" \
+	--designDir="$OUT_DIR" \
 	--rmapfile="$FILE_RMAP" \
 	--baitmapfile="$FILE_BAITMAP" \
-	--outfilePrefix="$DIR_DESIGN"/"$FNAME_OUT"\
+	--outfilePrefix="$OUT_DIR"/"$FNAME_OUT"\
 #extra parameters - add these if so desired
 #[--minFragLen=150] [--maxFragLen=40000] [--maxLBrownEst=1500000] [--binsize=20000] [--removeb2b=True] [--removeAdjacent=True]
 
