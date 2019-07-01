@@ -17,7 +17,7 @@ FILE_BAM="/scratch/DGE/MOPOPGEN/plaw/cyberman/crc/cHiC/HICUP_bowtie2/LCL_1_b37/G
 OUTPUT="/scratch/DGE/MOPOPGEN/path/to/output/"
 
 DATETIME=`date +%Y%m%d_%H%M%S`
-OUT_DIR="$DIR_HIC"/"results"/"$SAMPLE_NAME"/"chicago_designDir_""$DATETIME"
+OUT_DIR="$OUTPUT"/"results"/"$SAMPLE_NAME"/"chicago_designDir_""$DATETIME"
 LOG_FILE="$OUT_DIR"/"$DATETIME"_"designDir".log
 FNAME_OUT="$SAMPLE_NAME"_"$DATETIME"
 
@@ -29,7 +29,7 @@ FILE_RMAP="$REF_DIR"/"reference_data/20160111_163319_HindIII.rmap"
 # Baitmap file
 FILE_BAITMAP="$REF_DIR"/"reference_data/20170324_updated_HindIII.baitmap"
 # Location of CHiCAGO tools directory
-DIR_TOOLS="REF_DIR"/"scripts/chicagoTools/"
+DIR_TOOLS="$REF_DIR"/"scripts/chicagoTools/"
 
 
 # Set this to "nodelete" to keep intermediate files
