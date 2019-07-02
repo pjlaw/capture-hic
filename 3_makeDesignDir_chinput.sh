@@ -64,8 +64,8 @@ python "$DIR_TOOLS"/makeDesignFiles.py \
 #extra parameters - add these if so desired
 #[--minFragLen=150] [--maxFragLen=40000] [--maxLBrownEst=1500000] [--binsize=20000] [--removeb2b=True] [--removeAdjacent=True]
 
-# Load modules needed by bam2chicago.sh
-module load bedtools
+# Load modules needed by bam2chicago.sh - chicago does not support bedtools >= 2.26
+module load bedtools/2.25.0
 # use bam2chicago.sh to generate .chinput files
 SCRP_BAM2CHICAGO="$DIR_TOOLS"/bam2chicago.sh
 echo "Running script: ""$SCRP_BAM2CHICAGO"
