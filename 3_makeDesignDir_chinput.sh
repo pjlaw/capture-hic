@@ -72,8 +72,8 @@ echo "Running script: ""$SCRP_BAM2CHICAGO"
 CURRENT_DIRECTORY=$(pwd)
 echo "Current working directory: "${CURRENT_DIRECTORY}
 echo "Changing working directory to \"design directory\" because the bam2chicago.sh script uses the \"samplename\" variable in both the directory and a the file name."
-cd "$DIR_DESIGN"
-echo "         Design directory: ""$DIR_DESIGN"
+cd "$OUT_DIR"
+echo "         Design directory: ""$OUT_DIR"
 echo "Current working directory: "$(pwd)
 bash "$SCRP_BAM2CHICAGO" \
   "$FILE_BAM" \
